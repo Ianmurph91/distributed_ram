@@ -1,0 +1,9 @@
+# Global
+*.bak
+*.log
+
+
+# Example Project directory
+/distributed_RAM
+
+

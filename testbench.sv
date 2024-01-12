@@ -58,7 +58,6 @@ module testbench();
 
         // Store the valid write data and address in a queue so we can read thee addresses back out and compare
         if(write_enable == 1 && resetn == 1) begin
-            $display("Into Queue: data = 0x%0X, address = 0x%0X", data_in, write_addr);
             valid_data_writes.push_back(data_in);
             valid_addr_writes.push_back(write_addr);
         end
@@ -71,7 +70,6 @@ module testbench();
             rd_addr = valid_addr_writes.pop_front();
             // Check if the data_out bus matches the data in the queue:
             expected_data = valid_data_writes.pop_front();
-            $display("Out of Queue: data = 0x%0X, address = 0x%0X", expected_data, rd_addr);
             @ (posedge clkb); // wait a clk cycle for read data
             assert (data_out == expected_data) else begin
                 $error("Memory read error @ time %0t: expected value at addr 0x%0X = 0x%0X, actual value = 0x%0X ", $time, rd_addr, expected_data, data_out);
